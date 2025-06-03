@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { CheckoutButton } from './CheckoutButton';
 
 interface ProductCardProps {
   id: string;
@@ -204,28 +205,45 @@ const ProductCard = ({
           </div>
         )}
 
-        {/* Add to Cart Button */}
-        <button
-          onClick={handleAddToCart}
-          onKeyDown={(e) => handleKeyDown(e, handleAddToCart)}
-          className={`w-full px-4 py-3 rounded font-mono text-sm uppercase tracking-wider transition-all duration-300 ${
-            stock <= 0 
-              ? 'bg-dark-red/50 border border-dark-red text-dark-red cursor-not-allowed'
-              : 'btn-creepy text-light-gray'
-          }`}
-          tabIndex={0}
-          aria-label={`Add ${name} to cart`}
-          disabled={stock <= 0}
-        >
-          {stock <= 0 
-            ? 'OUT_OF_STOCK' 
-            : needsSizeSelection 
-              ? selectedSize 
-                ? `ADD_TO_CART [${selectedSize}]` 
-                : 'SELECT_SIZE_FIRST'
-              : 'ADD_TO_CART'
-          }
-        </button>
+        {/* Checkout Button */}
+        <div className="space-y-3">
+          {stock > 0 ? (
+            <>
+              <CheckoutButton 
+                product={{
+                  id: parseInt(id) || 0,
+                  name,
+                  price,
+                  category: category || 'T-Shirts'
+                }}
+              />
+              
+              {/* Secondary add to cart for shopping later */}
+              <button
+                onClick={handleAddToCart}
+                onKeyDown={(e) => handleKeyDown(e, handleAddToCart)}
+                className="w-full px-4 py-2 rounded font-mono text-xs uppercase tracking-wider transition-all duration-300 border border-blood-red/30 text-blood-red/70 hover:border-blood-red hover:text-blood-red"
+                tabIndex={0}
+                aria-label={`Add ${name} to cart for later`}
+                disabled={needsSizeSelection && !selectedSize}
+              >
+                {needsSizeSelection 
+                  ? selectedSize 
+                    ? `ADD_TO_CART [${selectedSize}]` 
+                    : 'SELECT_SIZE_FIRST'
+                  : 'ADD_TO_CART'
+                }
+              </button>
+            </>
+          ) : (
+            <button
+              className="w-full px-4 py-3 rounded font-mono text-sm uppercase tracking-wider bg-dark-red/50 border border-dark-red text-dark-red cursor-not-allowed"
+              disabled
+            >
+              OUT_OF_STOCK
+            </button>
+          )}
+        </div>
 
         {/* Terminal-style footer */}
         <div className="mt-3 text-blood-red/40 font-mono text-xs">
