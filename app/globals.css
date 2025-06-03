@@ -481,7 +481,7 @@ body {
     opacity: 1;
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.5;
   }
 }
 
@@ -494,16 +494,29 @@ body {
   }
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .animate-flicker {
-  animation: flicker 1.5s infinite alternate;
+  animation: flicker 0.2s ease-in-out infinite alternate;
 }
 
 .animate-pulse-slow {
   animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
 
 /* Responsive utilities */
@@ -573,6 +586,18 @@ body {
 
 .translate-y-20 {
   transform: translateY(5rem);
+}
+
+.translate-x-0 {
+  transform: translateX(0);
+}
+
+.-translate-x-10 {
+  transform: translateX(-2.5rem);
+}
+
+.translate-x-10 {
+  transform: translateX(2.5rem);
 }
 
 .opacity-0 {

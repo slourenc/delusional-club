@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
-import { CheckoutButton } from './CheckoutButton';
+import { useRouter } from 'next/navigation';
 
 interface ProductCardProps {
   id: string;
@@ -25,26 +24,17 @@ const ProductCard = ({
   stock = 0,
   sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'] 
 }: ProductCardProps) => {
-  const [selectedSize, setSelectedSize] = useState<string>('');
   const [isHovered, setIsHovered] = useState(false);
+  const router = useRouter();
 
-  const handleSizeSelect = (size: string) => {
-    setSelectedSize(size);
+  const handleCardClick = () => {
+    router.push(`/product/${id}`);
   };
 
-  const handleAddToCart = () => {
-    if (!selectedSize && category !== 'Headbands' && category !== 'Scarfs') {
-      alert('ERROR: SELECT_SIZE.EXE');
-      return;
-    }
-    console.log(`Adding ${name} (${selectedSize}) to cart`);
-    // Add to cart logic here
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      action();
+      handleCardClick();
     }
   };
 
@@ -62,30 +52,21 @@ const ProductCard = ({
     return '#CCCCCC';
   };
 
-  // Category-specific sizing
-  const getSizesForCategory = () => {
-    switch (category) {
-      case 'Gloves':
-        return ['S', 'M', 'L', 'XL'];
-      case 'Caps':
-        return ['One Size'];
-      case 'Headbands':
-      case 'Scarfs':
-        return ['One Size'];
-      default:
-        return sizes;
-    }
-  };
-
-  const productSizes = getSizesForCategory();
-  const needsSizeSelection = !['One Size'].includes(productSizes[0]);
-
   return (
     <div 
-      className="bg-void-black border-2 border-black-red hover:border-blood-red transition-all duration-500 rounded-lg overflow-hidden group relative crt-effect"
+      className="cursor-pointer transition-all duration-500 rounded-lg overflow-hidden group relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ background: '#000000' }}
+      onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label={`View details for ${name}`}
+      style={{ 
+        background: '#000000',
+        border: '2px solid #1A0505',
+        ...(isHovered && { borderColor: '#DC143C' })
+      }}
     >
       {/* Glitch overlay when hovered */}
       {isHovered && (
@@ -93,11 +74,11 @@ const ProductCard = ({
       )}
 
       {/* Product Image */}
-      <div className="relative h-64 bg-black-red/30 overflow-hidden">
+      <div className="relative h-64 overflow-hidden" style={{ background: 'rgba(26, 5, 5, 0.3)' }}>
         <img 
           src={image} 
           alt={name}
-          className="product-image w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           onError={(e) => {
             // Fallback if image doesn't load
             const target = e.currentTarget as HTMLImageElement;
@@ -110,28 +91,25 @@ const ProductCard = ({
         />
         
         {/* Fallback content */}
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-black-red to-void-black" style={{ display: 'none' }}>
+        <div className="absolute inset-0 flex items-center justify-center" style={{ display: 'none', background: 'linear-gradient(45deg, #1A0505, #000000)' }}>
           <div className="text-center">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-dark-red to-blood-red rounded-full flex items-center justify-center animate-pulse-slow">
-              <span className="text-light-gray font-mono text-xs">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center animate-pulse-slow" style={{ background: 'linear-gradient(45deg, #8B0000, #DC143C)' }}>
+              <span className="font-mono text-xs" style={{ color: '#CCCCCC' }}>
                 {category === 'T-Shirts' ? 'TEE' : 
                  category === 'Caps' ? 'CAP' :
                  category === 'Gloves' ? 'GLV' :
-                 category === 'Headbands' ? 'HBD' :
-                 category === 'Scarfs' ? 'SCF' : 'IMG'}
+                 category === 'Sets' ? 'SET' :
+                 category === 'Accessories' ? 'ACC' : 'IMG'}
               </span>
             </div>
-            <p className="text-blood-red font-mono text-xs tracking-wider">
+            <p className="font-mono text-xs tracking-wider" style={{ color: '#DC143C' }}>
               [{category?.toUpperCase()}]
             </p>
-            <p className="text-light-gray/50 font-mono text-xs mt-1">
+            <p className="font-mono text-xs mt-1" style={{ color: 'rgba(204, 204, 204, 0.5)' }}>
               image_loading.jpg
             </p>
           </div>
         </div>
-        
-        {/* Scanlines effect */}
-        <div className="absolute inset-0 scanlines opacity-30"></div>
         
         {/* Stock indicator - Elite Ware Style */}
         <div 
@@ -155,98 +133,75 @@ const ProductCard = ({
         >
           {category}
         </div>
+
+        {/* Click to view overlay */}
+        <div 
+          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+            isHovered ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ background: 'rgba(0, 0, 0, 0.7)' }}
+        >
+          <div className="text-center">
+            <p className="font-mono text-sm font-bold" style={{ color: '#DC143C' }}>
+              CLICK TO VIEW
+            </p>
+            <p className="font-mono text-xs" style={{ color: '#CCCCCC' }}>
+              &gt; PRODUCT DETAILS &lt;
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Product Info */}
       <div className="p-4">
-        <h3 className="text-light-gray font-creepy text-lg mb-2 text-shadow-red group-hover:animate-glitch">
+        <h3 className="font-mono text-lg mb-2 group-hover:animate-pulse" style={{ color: '#CCCCCC' }}>
           {name.toUpperCase()}
         </h3>
         
         {description && (
-          <p className="text-blood-red/80 font-mono text-xs mb-3 leading-relaxed">
-            {description}
+          <p className="font-mono text-xs mb-3 leading-relaxed" style={{ color: 'rgba(220, 20, 60, 0.8)' }}>
+            {description.length > 80 ? `${description.substring(0, 80)}...` : description}
           </p>
         )}
 
         {/* Price - Elite Ware Style */}
         <div className="flex items-center justify-between mb-4">
           <div>
-            <span className="text-light-gray font-mono text-lg">${price.toFixed(2)} USD</span>
-            <div className="text-blood-red/60 font-mono text-xs">
+            <span className="font-mono text-lg" style={{ color: '#CCCCCC' }}>${price} EUR</span>
+            <div className="font-mono text-xs" style={{ color: 'rgba(220, 20, 60, 0.6)' }}>
               Regular price
             </div>
           </div>
         </div>
 
-        {/* Size Selection */}
-        {needsSizeSelection && (
-          <div className="mb-4">
-            <p className="text-light-gray font-mono text-sm mb-2">SELECT_SIZE:</p>
-            <div className="flex flex-wrap gap-2">
-              {productSizes.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => handleSizeSelect(size)}
-                  onKeyDown={(e) => handleKeyDown(e, () => handleSizeSelect(size))}
-                  className={`px-3 py-1 border font-mono text-xs transition-all duration-300 ${
-                    selectedSize === size
-                      ? 'border-blood-red bg-blood-red/20 text-blood-red text-shadow-crimson'
-                      : 'border-black-red text-light-gray hover:border-blood-red hover:text-blood-red'
-                  }`}
-                  tabIndex={0}
-                  aria-label={`Select size ${size}`}
-                  disabled={stock <= 0}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Checkout Button */}
-        <div className="space-y-3">
-          {stock > 0 ? (
-            <>
-              <CheckoutButton 
-                product={{
-                  id: parseInt(id) || 0,
-                  name,
-                  price,
-                  category: category || 'T-Shirts'
-                }}
-              />
-              
-              {/* Secondary add to cart for shopping later */}
-              <button
-                onClick={handleAddToCart}
-                onKeyDown={(e) => handleKeyDown(e, handleAddToCart)}
-                className="w-full px-4 py-2 rounded font-mono text-xs uppercase tracking-wider transition-all duration-300 border border-blood-red/30 text-blood-red/70 hover:border-blood-red hover:text-blood-red"
-                tabIndex={0}
-                aria-label={`Add ${name} to cart for later`}
-                disabled={needsSizeSelection && !selectedSize}
-              >
-                {needsSizeSelection 
-                  ? selectedSize 
-                    ? `ADD_TO_CART [${selectedSize}]` 
-                    : 'SELECT_SIZE_FIRST'
-                  : 'ADD_TO_CART'
-                }
-              </button>
-            </>
-          ) : (
-            <button
-              className="w-full px-4 py-3 rounded font-mono text-sm uppercase tracking-wider bg-dark-red/50 border border-dark-red text-dark-red cursor-not-allowed"
-              disabled
-            >
-              OUT_OF_STOCK
-            </button>
-          )}
-        </div>
+        {/* View Details Button */}
+        <button
+          className="w-full px-4 py-3 rounded font-mono text-sm uppercase tracking-wider transition-all duration-300 border-2"
+          style={{
+            borderColor: '#DC143C',
+            color: '#DC143C',
+            background: 'transparent'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(220, 20, 60, 0.2)';
+            e.currentTarget.style.color = '#CCCCCC';
+            e.stopPropagation();
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'transparent';
+            e.currentTarget.style.color = '#DC143C';
+            e.stopPropagation();
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleCardClick();
+          }}
+        >
+          VIEW DETAILS
+        </button>
 
         {/* Terminal-style footer */}
-        <div className="mt-3 text-blood-red/40 font-mono text-xs">
+        <div className="mt-3 font-mono text-xs" style={{ color: 'rgba(220, 20, 60, 0.4)' }}>
           {'>'} product_id: {id} {'<'}
           <br />
           {'>'} stock_level: {stock} {'<'}

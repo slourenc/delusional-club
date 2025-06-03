@@ -3,126 +3,70 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 
-// Expanded product data with multiple categories - inspired by Elite Ware
+// Reduced to 6 products - 4 from client images plus 2 additional
 const mockProducts = [
-  // T-SHIRTS
+  // From client images
   {
     id: 'dc001',
-    name: 'MIND FRACTURE TEE',
-    price: 45.00,
-    image: '/images/products/delusional-tee.svg',
-    description: 'Break the simulation. Wear the glitch.',
-    category: 'T-Shirts',
+    name: 'DELUSIONAL CLUB CAP',
+    price: 24.99,
+    image: '/images/products/void-walker-cap.svg',
+    description: '4 EMBROIDERED DESIGNS - CLASSIC BASEBALL CAP SHAPE - VENTILATION EYELETS EMBROIDERED ON TOP - ADJUSTABLE BUCKLE IN THE BACK',
+    category: 'Caps',
     stock: 8
   },
   {
-    id: 'dc002', 
-    name: 'REALITY DENIAL TEE',
-    price: 50.00,
-    image: '/images/products/delusional-tee.svg',
-    description: 'For those who refuse to accept the truth.',
-    category: 'T-Shirts',
-    stock: 3
+    id: 'dc002',
+    name: 'DELUSIONAL GLOVES',
+    price: 18.99,
+    image: '/images/products/delusional-gloves.svg',
+    description: 'Professional work gloves with DELUSIONAL branding and safety symbols.',
+    category: 'Gloves',
+    stock: 12,
+    sizes: ['S', 'M', 'L', 'XL']
   },
   {
     id: 'dc003',
-    name: 'SCHIZO ENERGY TEE',
-    price: 40.00,
-    image: '/images/products/delusional-tee.svg', 
-    description: 'Channel the chaos within.',
-    category: 'T-Shirts',
-    stock: 12
+    name: 'BLACK TRACKSUIT SET',
+    price: 89.99,
+    image: '/images/products/black-tracksuit.svg',
+    description: 'Complete hoodie and pants set with signature styling.',
+    category: 'Sets',
+    stock: 5,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL']
   },
-  // CAPS & HEADWEAR
   {
     id: 'dc004',
-    name: 'VOID WALKER CAP',
-    price: 35.00,
-    image: '/images/products/void-walker-cap.svg',
-    description: 'Navigate the emptiness between worlds.',
-    category: 'Caps',
-    stock: 5
+    name: 'DELUSIONAL TEE',
+    price: 32.99,
+    image: '/images/products/delusional-tee.svg',
+    description: 'Classic black tee with DC delusional branding.',
+    category: 'T-Shirts',
+    stock: 15,
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
   },
+  // Additional products
   {
     id: 'dc005',
-    name: 'NEURAL DECAY BEANIE',
-    price: 30.00,
+    name: 'VOID BEANIE',
+    price: 19.99,
     image: '/images/products/beanie.svg',
-    description: 'Watch your thoughts dissolve.',
+    description: 'Ribbed knit beanie with DC label.',
     category: 'Caps',
-    stock: 7
+    stock: 10
   },
   {
     id: 'dc006',
-    name: 'BLOOD MOON SNAPBACK',
-    price: 38.00,
-    image: '/images/products/void-walker-cap.svg',
-    description: 'Eclipse your reality.',
-    category: 'Caps',
-    stock: 4
-  },
-  // GLOVES
-  {
-    id: 'dc007',
-    name: 'DELUSION ENGINE GLOVES',
-    price: 25.00,
-    image: '/images/products/delusional-gloves.svg',
-    description: 'Fuel your beautiful madness.',
-    category: 'Gloves',
-    stock: 15,
-    sizes: ['S', 'M', 'L', 'XL']
-  },
-  {
-    id: 'dc008',
-    name: 'CRIMSON GRIP GLOVES',
-    price: 28.00,
-    image: '/images/products/delusional-gloves.svg',
-    description: 'Hold onto what remains.',
-    category: 'Gloves',
-    stock: 9,
-    sizes: ['S', 'M', 'L', 'XL']
-  },
-  // HEADBANDS
-  {
-    id: 'dc009',
-    name: 'PSYCHO WARD HEADBAND',
-    price: 18.00,
-    image: '/images/products/headband.svg',
-    description: 'Keep the madness contained.',
-    category: 'Headbands',
-    stock: 20
-  },
-  {
-    id: 'dc010',
-    name: 'BLOOD RITUAL HEADBAND',
-    price: 22.00,
-    image: '/images/products/headband.svg',
-    description: 'Sacred ceremony of the lost.',
-    category: 'Headbands',
-    stock: 6
-  },
-  // SCARFS
-  {
-    id: 'dc011',
     name: 'NIGHTMARE SCARF',
-    price: 32.00,
+    price: 28.99,
     image: '/images/products/scarf.svg',
-    description: 'Wrap yourself in darkness.',
-    category: 'Scarfs',
-    stock: 11
-  },
-  {
-    id: 'dc012',
-    name: 'APOCALYPSE SCARF',
-    price: 35.00,
-    image: '/images/products/scarf.svg',
-    description: 'End times fashion.',
-    category: 'Scarfs',
-    stock: 2
-  },
+    description: 'Black scarf with fringe details and NIGHTMARE embroidery.',
+    category: 'Accessories',
+    stock: 7
+  }
 ];
 
-const productCategories = ['All', 'T-Shirts', 'Caps', 'Gloves', 'Headbands', 'Scarfs'];
+const productCategories = ['All', 'T-Shirts', 'Caps', 'Gloves', 'Sets', 'Accessories'];
 
 const HomePage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
