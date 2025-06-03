@@ -24,6 +24,7 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [scarfView, setScarfView] = useState<'front' | 'back'>('front');
 
   useEffect(() => {
     setIsLoaded(true);
@@ -46,15 +47,29 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
   const productSizes = getSizesForCategory();
   const needsSizeSelection = !['One Size'].includes(productSizes[0]);
 
-  const getStockColor = () => {
-    if (product.stock <= 0) return '#8B0000';
-    if (product.stock <= 3) return '#DC143C';
-    return '#CCCCCC';
+  // Handle scarf image switching
+  const getCurrentImage = () => {
+    if (product.id === 'dc006') {
+      return scarfView === 'front' 
+        ? '/images/products/scarf_front.jpg' 
+        : '/images/products/scarf_back.jpg';
+    }
+    return product.image;
   };
 
   return (
     <div className="min-h-screen" style={{ background: '#000000' }}>
       <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Dark Web Warning Banner */}
+        <div className="mb-8 border-2 border-red-600 bg-black p-4 text-center font-mono">
+          <div className="flex items-center justify-center space-x-4 mb-2">
+            <span className="text-2xl">💀</span>
+            <span className="text-red-600 font-bold">⚠️ RESTRICTED ACCESS ZONE ⚠️</span>
+            <span className="text-2xl">💀</span>
+          </div>
+          <p className="text-xs text-red-400">UNAUTHORIZED VIEWING MAY RESULT IN PERMANENT REALITY DAMAGE</p>
+        </div>
+
         {/* Breadcrumb */}
         <nav className="mb-8">
           <div className="flex items-center space-x-2 font-mono text-sm">
@@ -83,35 +98,79 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Image */}
-          <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+          {/* Product Image Section */}
+          <div className="relative">
             <div className="relative">
               <img 
-                src={product.image}
+                src={getCurrentImage()}
                 alt={product.name}
-                className="w-full h-auto rounded-lg"
-                style={{ background: '#1A0505', minHeight: '400px' }}
+                className="w-full h-[500px] object-contain rounded-lg border-2 border-red-900"
+                style={{ background: '#1A0505' }}
               />
               
-              {/* Stock badge */}
-              <div 
-                className="absolute top-4 right-4 px-3 py-2 rounded font-mono text-sm"
-                style={{ 
-                  background: 'rgba(0, 0, 0, 0.8)',
-                  color: getStockColor(),
-                  border: `1px solid ${getStockColor()}`
-                }}
-              >
-                {product.stock <= 0 ? 'OUT OF STOCK' :
-                 product.stock <= 3 ? `only ${product.stock} remaining...` :
-                 `${product.stock} available`}
+              {/* Skull corner decorations */}
+              <div className="absolute -top-3 -left-3 text-xl">💀</div>
+              <div className="absolute -top-3 -right-3 text-xl">💀</div>
+              <div className="absolute -bottom-3 -left-3 text-xl">💀</div>
+              <div className="absolute -bottom-3 -right-3 text-xl">💀</div>
+
+              {/* Scarf view switcher */}
+              {product.id === 'dc006' && (
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => setScarfView('front')}
+                      className={`px-3 py-1 font-mono text-xs border ${
+                        scarfView === 'front' ? 'bg-red-800 text-white' : 'text-red-400 border-red-800'
+                      }`}
+                    >
+                      FRONT
+                    </button>
+                    <button
+                      onClick={() => setScarfView('back')}
+                      className={`px-3 py-1 font-mono text-xs border ${
+                        scarfView === 'back' ? 'bg-red-800 text-white' : 'text-red-400 border-red-800'
+                      }`}
+                    >
+                      BACK
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Warning Signs Below Image */}
+            <div className="mt-6 space-y-3">
+              <div className="border border-yellow-600 bg-black p-3 text-center font-mono text-xs">
+                <div className="flex items-center justify-center space-x-2">
+                  <span>⚠️</span>
+                  <span className="text-yellow-400">DANGER: SANITY LEVELS CRITICAL</span>
+                  <span>⚠️</span>
+                </div>
+              </div>
+              <div className="border border-red-600 bg-black p-3 text-center font-mono text-xs">
+                <div className="flex items-center justify-center space-x-2">
+                  <span>🚫</span>
+                  <span className="text-red-400">REALITY.EXE HAS STOPPED WORKING</span>
+                  <span>🚫</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Product Info */}
-          <div className={`transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+          {/* Product Info Section */}
+          <div>
             <div className="space-y-6">
+              {/* Skull Header */}
+              <div className="text-center mb-6">
+                <div className="flex items-center justify-center space-x-4 text-2xl mb-2">
+                  <span>💀</span>
+                  <span>💀</span>
+                  <span>💀</span>
+                </div>
+                <p className="font-mono text-xs text-red-400">PRODUCT FROM THE ABYSS</p>
+              </div>
+
               {/* Product Title */}
               <div>
                 <h1 className="text-3xl font-mono font-bold mb-2" style={{ color: '#CCCCCC' }}>
@@ -127,10 +186,26 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
                 </div>
               </div>
 
+              {/* Product Description */}
+              <div className="border border-red-800 bg-black p-4">
+                <h3 className="font-mono text-sm mb-3 text-red-400 flex items-center">
+                  <span className="mr-2">💀</span>
+                  VOID MANIFEST
+                  <span className="ml-2">💀</span>
+                </h3>
+                <p className="font-mono text-sm leading-relaxed" style={{ color: '#CCCCCC' }}>
+                  {product.description}
+                </p>
+              </div>
+
               {/* Size Selection */}
               {needsSizeSelection && product.stock > 0 && (
                 <div>
-                  <h3 className="font-mono text-sm mb-3" style={{ color: '#CCCCCC' }}>Size</h3>
+                  <h3 className="font-mono text-sm mb-3 flex items-center" style={{ color: '#CCCCCC' }}>
+                    <span className="mr-2">⚠️</span>
+                    Size
+                    <span className="ml-2">⚠️</span>
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {productSizes.map((size) => (
                       <button
@@ -164,7 +239,11 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
 
               {/* Quantity */}
               <div>
-                <h3 className="font-mono text-sm mb-3" style={{ color: '#CCCCCC' }}>Quantity</h3>
+                <h3 className="font-mono text-sm mb-3 flex items-center" style={{ color: '#CCCCCC' }}>
+                  <span className="mr-2">🚫</span>
+                  Quantity
+                  <span className="ml-2">🚫</span>
+                </h3>
                 <div className="flex items-center border" style={{ borderColor: '#8B0000', width: 'fit-content' }}>
                   <button 
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -236,45 +315,24 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
                 )}
               </div>
 
-              {/* Product Details */}
-              <div className="space-y-4">
-                <div>
-                  <p className="font-mono text-sm" style={{ color: '#CCCCCC' }}>
-                    {product.description}
-                  </p>
-                </div>
-
-                {/* Materials (for cap) */}
-                {product.id === 'dc001' && (
-                  <div className="space-y-2">
-                    <details className="font-mono text-sm">
-                      <summary className="cursor-pointer" style={{ color: '#CCCCCC' }}>
-                        📋 MATERIALS
-                      </summary>
-                      <div className="mt-2 pl-4 space-y-1" style={{ color: 'rgba(220, 20, 60, 0.8)' }}>
-                        <p>Main material: 100% cotton</p>
-                        <p>Embroidery: 100% Polyester</p>
-                      </div>
-                    </details>
-
-                    <details className="font-mono text-sm">
-                      <summary className="cursor-pointer" style={{ color: '#CCCCCC' }}>
-                        📏 SIZE CHART
-                      </summary>
-                      <div className="mt-2 pl-4" style={{ color: 'rgba(220, 20, 60, 0.8)' }}>
-                        <p>One size fits most</p>
-                        <p>Adjustable buckle in the back</p>
-                      </div>
-                    </details>
+              {/* Terminal Footer */}
+              <div className="border-2 border-red-600 bg-black p-4 mt-8">
+                <div className="text-center space-y-2">
+                  <div className="flex items-center justify-center space-x-2 text-xl">
+                    <span>💀</span>
+                    <span>⚠️</span>
+                    <span>☠️</span>
+                    <span>🚫</span>
+                    <span>💀</span>
                   </div>
-                )}
-              </div>
-
-              {/* Share */}
-              <div className="border-t pt-6" style={{ borderColor: '#1A0505' }}>
-                <button className="font-mono text-sm" style={{ color: '#DC143C' }}>
-                  📤 Share
-                </button>
+                  <p className="font-mono text-xs text-red-400">VOID PURCHASE INITIATED</p>
+                  <p className="font-mono text-xs text-yellow-400">REALITY CORRUPTION IN PROGRESS</p>
+                  <div className="font-mono text-xs text-gray-500 mt-4">
+                    <p>{'>'} product_id: {product.id}</p>
+                    <p>{'>'} void_level: MAXIMUM</p>
+                    <p>{'>'} sanity_check: FAILED</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

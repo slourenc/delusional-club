@@ -10,7 +10,7 @@ const mockProducts = [
     id: 'dc001',
     name: 'DELUSIONAL CLUB CAP',
     price: 24.99,
-    image: '/images/products/void-walker-cap.svg',
+    image: '/images/products/cap.png',
     description: '4 EMBROIDERED DESIGNS - CLASSIC BASEBALL CAP SHAPE - VENTILATION EYELETS EMBROIDERED ON TOP - ADJUSTABLE BUCKLE IN THE BACK',
     category: 'Caps',
     stock: 8
@@ -19,7 +19,7 @@ const mockProducts = [
     id: 'dc002',
     name: 'DELUSIONAL GLOVES',
     price: 18.99,
-    image: '/images/products/delusional-gloves.svg',
+    image: '/images/products/gloves.png',
     description: 'Professional work gloves with DELUSIONAL branding and safety symbols.',
     category: 'Gloves',
     stock: 12,
@@ -29,7 +29,7 @@ const mockProducts = [
     id: 'dc003',
     name: 'BLACK TRACKSUIT SET',
     price: 89.99,
-    image: '/images/products/black-tracksuit.svg',
+    image: '/images/products/tracksuit.png',
     description: 'Complete hoodie and pants set with signature styling.',
     category: 'Sets',
     stock: 5,
@@ -39,7 +39,7 @@ const mockProducts = [
     id: 'dc004',
     name: 'DELUSIONAL TEE',
     price: 32.99,
-    image: '/images/products/delusional-tee.svg',
+    image: '/images/products/tee.png',
     description: 'Classic black tee with DC delusional branding.',
     category: 'T-Shirts',
     stock: 15,
@@ -50,7 +50,7 @@ const mockProducts = [
     id: 'dc005',
     name: 'VOID BEANIE',
     price: 19.99,
-    image: '/images/products/beanie.svg',
+    image: '/images/placeholder-beanie.svg',
     description: 'Ribbed knit beanie with DC label.',
     category: 'Caps',
     stock: 10
@@ -59,20 +59,80 @@ const mockProducts = [
     id: 'dc006',
     name: 'NIGHTMARE SCARF',
     price: 28.99,
-    image: '/images/products/scarf.svg',
+    image: '/images/products/scarf_front.jpg',
     description: 'Black scarf with fringe details and NIGHTMARE embroidery.',
     category: 'Accessories',
     stock: 7
   }
 ];
 
-const productCategories = ['All', 'T-Shirts', 'Caps', 'Gloves', 'Sets', 'Accessories'];
+// Gallery media items - Fixed with shorter filenames for git compatibility
+const galleryItems = [
+  {
+    type: 'image',
+    src: '/images/ideas/lookcap_85a286ed.jpg',
+    title: 'LOOK 1 - CAP & GLOVES'
+  },
+  {
+    type: 'image',
+    src: '/images/ideas/lookcap_cd89c54c.jpg',
+    title: 'LOOK 1 - ALT VIEW'
+  },
+  {
+    type: 'image',
+    src: '/images/ideas/looknitrile_c8c90898.jpg',
+    title: 'LOOK 2 - GLOVES'
+  },
+  {
+    type: 'image',
+    src: '/images/ideas/looknitrile_1e8f5ac4.jpg',
+    title: 'LOOK 2 - ALT 1'
+  },
+  {
+    type: 'image',
+    src: '/images/ideas/looknitrile_b934e540.jpg',
+    title: 'LOOK 2 - ALT 2'
+  },
+  {
+    type: 'image',
+    src: '/images/ideas/lookcap_e4688ede.jpg',
+    title: 'LOOK 3 - CAP'
+  },
+  {
+    type: 'image',
+    src: '/images/ideas/lookcap_fc8218b0.jpg',
+    title: 'LOOK 3 - ALT'
+  },
+  {
+    type: 'image',
+    src: '/images/ideas/lookd.i.e_982ad210.jpg',
+    title: 'D.I.E SHIRT - SOLD OUT'
+  },
+  {
+    type: 'video',
+    src: '/images/ideas/lookwww.delusional-club.com.mp4_52a80912.mp4',
+    title: 'PROMO VIDEO'
+  },
+  {
+    type: 'video',
+    src: '/images/ideas/lookgo_727fd753.mp4',
+    title: 'SHOP PROMO'
+  },
+  {
+    type: 'video',
+    src: '/images/ideas/lookgif.mp4_f3cddbc3.mp4',
+    title: 'AESTHETIC CLIP'
+  },
+  {
+    type: 'video',
+    src: '/images/ideas/lookyuzi_33245f42.mp4',
+    title: 'HOODIE SHOWCASE'
+  }
+];
 
 const HomePage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentDateTime, setCurrentDateTime] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [filteredProducts, setFilteredProducts] = useState(mockProducts);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -89,18 +149,6 @@ const HomePage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (selectedCategory === 'All') {
-      setFilteredProducts(mockProducts);
-    } else {
-      setFilteredProducts(mockProducts.filter(product => product.category === selectedCategory));
-    }
-  }, [selectedCategory]);
-
-  const handleCategoryFilter = (category: string) => {
-    setSelectedCategory(category);
-  };
-
   return (
     <div className="min-h-screen" style={{ background: '#000000' }}>
       {/* Hero Section */}
@@ -109,19 +157,19 @@ const HomePage = () => {
         style={{ background: '#000000' }}
       >
         <div className="max-w-4xl mx-auto relative z-10">
-          {/* Terminal header */}
+          {/* Terminal header with enhanced data */}
           <div className="mb-8 font-mono text-xs" style={{ color: '#DC143C' }}>
             <p>{'>'} system_time: {currentDateTime}</p>
             <p>{'>'} connection_status: UNSTABLE</p>
             <p>{'>'} reality_integrity: COMPROMISED</p>
-            <p>{'>'} products_loaded: {filteredProducts.length}</p>
+            <p>{'>'} products_loaded: {mockProducts.length}</p>
+            <p>{'>'} void_level: MAXIMUM</p>
+            <p>{'>'} sanity_check: FAILED</p>
           </div>
 
-          {/* Main heading with glitch effect */}
+          {/* Main heading */}
           <h1 
-            className={`text-4xl md:text-6xl lg:text-7xl font-creepy mb-6 transition-all duration-1000 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+            className="text-4xl md:text-6xl lg:text-7xl font-creepy mb-6 opacity-100"
             style={{ color: '#CCCCCC' }}
           >
             <span className="glitch-text text-shadow-red" data-text="WELCOME TO THE">
@@ -129,14 +177,14 @@ const HomePage = () => {
             </span>
             <br />
             <span 
-              className="text-5xl md:text-7xl lg:text-8xl text-shadow-crimson animate-flicker"
+              className="text-5xl md:text-7xl lg:text-8xl text-shadow-crimson"
               style={{ color: '#DC143C' }}
             >
               DELUSIONAL CLUB
             </span>
           </h1>
 
-          <div className={`space-y-4 mb-12 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="space-y-4 mb-12 opacity-100">
             <p className="text-xl md:text-2xl font-mono" style={{ color: '#CCCCCC' }}>
               {'>'} WHERE SANITY GOES TO DIE {'<'}
             </p>
@@ -147,7 +195,7 @@ const HomePage = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center mb-16 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 opacity-100">
             <button 
               className="btn-creepy px-8 py-4 rounded font-mono text-lg uppercase tracking-wider"
               style={{ color: '#CCCCCC' }}
@@ -170,16 +218,22 @@ const HomePage = () => {
                 e.currentTarget.style.background = 'transparent';
                 e.currentTarget.style.color = '#DC143C';
               }}
+              onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              JOIN THE VOID
+              VIEW GALLERY
             </button>
           </div>
 
-          {/* Warning banner */}
+          {/* Enhanced Warning banner with skull motifs */}
           <div 
             className="retro-border p-4 mx-auto max-w-lg"
             style={{ background: 'rgba(139, 0, 0, 0.2)' }}
           >
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <span className="text-lg">💀</span>
+              <span className="text-lg">⚠️</span>
+              <span className="text-lg">💀</span>
+            </div>
             <p className="font-mono text-sm" style={{ color: '#CCCCCC' }}>
               ⚠️ WARNING: PROLONGED EXPOSURE MAY CAUSE ⚠️<br/>
               EXISTENTIAL DREAD • REALITY GLITCHES • ENLIGHTENMENT
@@ -190,21 +244,21 @@ const HomePage = () => {
         {/* Background effects */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
-            className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full blur-3xl animate-pulse-slow"
+            className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full blur-3xl"
             style={{ background: 'rgba(220, 20, 60, 0.1)' }}
           ></div>
           <div 
-            className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full blur-3xl animate-pulse"
+            className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full blur-3xl"
             style={{ background: 'rgba(139, 0, 0, 0.1)' }}
           ></div>
         </div>
       </section>
 
-      {/* Category Filter & Products Section */}
+      {/* Products Section - 3x2 Grid, Fixed Sizing */}
       <section id="catalog" className="py-16 px-4" style={{ background: '#000000' }}>
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-12">
             <div 
               className="inline-block retro-border px-6 py-3 mb-6"
               style={{ background: 'rgba(26, 5, 5, 0.3)' }}
@@ -213,104 +267,124 @@ const HomePage = () => {
                 DELUSION CATALOG
               </h2>
             </div>
-            <p className="font-mono text-sm max-w-2xl mx-auto mb-8" style={{ color: '#DC143C' }}>
+            <p className="font-mono text-sm max-w-2xl mx-auto" style={{ color: '#DC143C' }}>
               {'>'} HANDCRAFTED IN THE VOID {'<'}<br/>
               {'>'} SHIPPED FROM ANOTHER DIMENSION {'<'}
             </p>
-
-            {/* Category Filter - Elite Ware Style */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              {productCategories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => handleCategoryFilter(category)}
-                  className={`px-4 py-2 rounded font-mono text-sm uppercase tracking-wider transition-all duration-300 ${
-                    selectedCategory === category 
-                      ? 'btn-creepy' 
-                      : ''
-                  }`}
-                  style={{
-                    border: selectedCategory === category ? '1px solid #DC143C' : '1px solid #8B0000',
-                    color: selectedCategory === category ? '#CCCCCC' : '#DC143C',
-                    background: selectedCategory === category ? 'linear-gradient(45deg, #1A0505, #8B0000)' : 'transparent'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (selectedCategory !== category) {
-                      e.currentTarget.style.background = 'rgba(220, 20, 60, 0.1)';
-                      e.currentTarget.style.borderColor = '#DC143C';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (selectedCategory !== category) {
-                      e.currentTarget.style.background = 'transparent';
-                      e.currentTarget.style.borderColor = '#8B0000';
-                    }
-                  }}
-                >
-                  {category} {category !== 'All' && `(${mockProducts.filter(p => p.category === category).length})`}
-                </button>
-              ))}
-            </div>
           </div>
 
-          {/* Products Grid - Elite Ware Inspired Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-            {filteredProducts.map((product, index) => (
-              <div
+          {/* Products Grid - 3x2 Layout with Fixed Heights */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {mockProducts.map((product) => (
+              <ProductCard
                 key={product.id}
-                className={`transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
-                style={{ transitionDelay: `${index * 50}ms` }}
-              >
-                <ProductCard {...product} />
-              </div>
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                description={product.description}
+                category={product.category}
+                stock={product.stock}
+                sizes={product.sizes}
+              />
             ))}
           </div>
 
-          {/* Stats Section - Elite Ware Style */}
-          <div className="text-center mb-8">
-            <div 
-              className="inline-block retro-border px-8 py-4"
-              style={{ background: 'rgba(26, 5, 5, 0.2)' }}
-            >
-              <div className="font-mono text-sm space-y-1" style={{ color: '#CCCCCC' }}>
-                <p>{'>'} Total Products: {mockProducts.length}</p>
-                <p>{'>'} Categories: {productCategories.length - 1}</p>
-                <p>{'>'} Items in Stock: {mockProducts.reduce((total, product) => total + (product.stock || 0), 0)}</p>
-                <p className="text-blood-red">{'>'} Sanity Level: CRITICAL</p>
-              </div>
+          {/* Enhanced Terminal style footer for catalog */}
+          <div className="text-center mt-16 font-mono text-xs" style={{ color: 'rgba(220, 20, 60, 0.4)' }}>
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <span>💀</span>
+              <span>⚠️</span>
+              <span>💀</span>
             </div>
-          </div>
-
-          {/* View All Button */}
-          <div className="text-center">
-            <button 
-              className="btn-creepy px-12 py-4 rounded font-mono text-lg uppercase tracking-wider"
-              style={{ color: '#CCCCCC' }}
-              onClick={() => setSelectedCategory('All')}
-            >
-              VIEW ALL PRODUCTS
-            </button>
+            <p>{'>'} catalog_loaded: {mockProducts.length} items {'<'}</p>
+            <p>{'>'} reality_status: QUESTIONABLE {'<'}</p>
+            <p>{'>'} shipping_dimension: VOID {'<'}</p>
+            <p>{'>'} psychological_damage: GUARANTEED {'<'}</p>
           </div>
         </div>
       </section>
 
-      {/* Bottom Terminal Section */}
-      <section className="py-12 px-4" style={{ background: 'rgba(0, 0, 0, 0.5)' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <div 
-            className="retro-border p-8"
-            style={{ background: 'rgba(26, 5, 5, 0.2)' }}
-          >
-            <h3 className="text-2xl font-creepy mb-4 text-shadow-crimson" style={{ color: '#DC143C' }}>
-              SYSTEM MESSAGE
-            </h3>
-            <div className="font-mono text-sm space-y-2" style={{ color: '#CCCCCC' }}>
-              <p>{'>'} You have entered a restricted zone</p>
-              <p>{'>'} Your reality privileges have been revoked</p>
-              <p>{'>'} Welcome to the other side</p>
-              <p>{'>'} Product catalog initialized: {mockProducts.length} items loaded</p>
-              <p className="mt-4" style={{ color: '#8B0000' }}>{'>'} There is no exit</p>
+      {/* Gallery Section */}
+      <section id="gallery" className="py-16 px-4" style={{ background: 'rgba(26, 5, 5, 0.3)' }}>
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <div 
+              className="inline-block retro-border px-6 py-3 mb-6"
+              style={{ background: 'rgba(0, 0, 0, 0.8)' }}
+            >
+              <h2 className="text-2xl md:text-3xl font-creepy text-shadow-red" style={{ color: '#CCCCCC' }}>
+                VOID GALLERY
+              </h2>
             </div>
+            <p className="font-mono text-sm max-w-2xl mx-auto" style={{ color: '#DC143C' }}>
+              {'>'} CAPTURED MOMENTS FROM THE ABYSS {'<'}<br/>
+              {'>'} REALITY DOCUMENTED BEFORE CORRUPTION {'<'}
+            </p>
+          </div>
+
+          {/* Gallery Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {galleryItems.map((item, index) => (
+              <div 
+                key={index}
+                className="relative group border-2 border-red-900 bg-black overflow-hidden"
+                style={{ aspectRatio: '1/1' }}
+              >
+                {item.type === 'image' ? (
+                  <img 
+                    src={item.src}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <video 
+                    src={item.src}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                )}
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="flex items-center justify-center space-x-2 mb-2">
+                      <span className="text-red-400">💀</span>
+                      <span className="text-yellow-400">⚠️</span>
+                      <span className="text-red-400">💀</span>
+                    </div>
+                    <h3 className="font-mono text-xs text-red-400 uppercase tracking-wider">
+                      {item.title}
+                    </h3>
+                    <p className="font-mono text-xs text-gray-500 mt-1">
+                      {item.type === 'video' ? '[VIDEO]' : '[IMAGE]'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Corner skulls */}
+                <div className="absolute top-1 left-1 text-red-800 text-sm">💀</div>
+                <div className="absolute top-1 right-1 text-red-800 text-sm">💀</div>
+                <div className="absolute bottom-1 left-1 text-red-800 text-sm">💀</div>
+                <div className="absolute bottom-1 right-1 text-red-800 text-sm">💀</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Gallery Footer */}
+          <div className="text-center mt-16 font-mono text-xs" style={{ color: 'rgba(220, 20, 60, 0.4)' }}>
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <span>💀</span>
+              <span>📸</span>
+              <span>💀</span>
+            </div>
+            <p>{'>'} gallery_items: {galleryItems.length} entries {'<'}</p>
+            <p>{'>'} media_corruption: 0% {'<'}</p>
+            <p>{'>'} void_aesthetic: MAXIMUM {'<'}</p>
           </div>
         </div>
       </section>

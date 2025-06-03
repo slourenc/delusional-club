@@ -36,7 +36,7 @@ export default function RootLayout({
             minHeight: '100vh'
           }}
         >
-          {/* Background effects */}
+          {/* Background effects - removed animations */}
           <div className="fixed inset-0 pointer-events-none z-0">
             <div 
               className="h-full w-full" 
@@ -56,15 +56,15 @@ export default function RootLayout({
             <Footer />
           </div>
 
-          {/* Ambient glitch effect */}
+          {/* Ambient glitch effect - removed animations */}
           <div 
-            className="fixed top-0 left-0 w-full h-1 opacity-30 animate-pulse pointer-events-none z-20"
+            className="fixed top-0 left-0 w-full h-1 opacity-30 pointer-events-none z-20"
             style={{ 
               background: 'linear-gradient(90deg, transparent 0%, #DC143C 50%, transparent 100%)' 
             }}
           ></div>
           <div 
-            className="fixed bottom-0 left-0 w-full h-1 opacity-20 animate-pulse pointer-events-none z-20"
+            className="fixed bottom-0 left-0 w-full h-1 opacity-20 pointer-events-none z-20"
             style={{ 
               background: 'linear-gradient(90deg, transparent 0%, #8B0000 50%, transparent 100%)' 
             }}

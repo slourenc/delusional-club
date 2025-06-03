@@ -6,7 +6,7 @@ const mockProducts = [
     id: 'dc001',
     name: 'DELUSIONAL CLUB CAP',
     price: 24.99,
-    image: '/images/products/void-walker-cap.svg',
+    image: '/images/products/cap.png',
     description: '4 EMBROIDERED DESIGNS - CLASSIC BASEBALL CAP SHAPE - VENTILATION EYELETS EMBROIDERED ON TOP - ADJUSTABLE BUCKLE IN THE BACK',
     category: 'Caps',
     stock: 8,
@@ -17,7 +17,7 @@ const mockProducts = [
     id: 'dc002',
     name: 'DELUSIONAL GLOVES',
     price: 18.99,
-    image: '/images/products/delusional-gloves.svg',
+    image: '/images/products/gloves.png',
     description: 'Professional work gloves with DELUSIONAL branding and safety symbols.',
     category: 'Gloves',
     stock: 12,
@@ -27,7 +27,7 @@ const mockProducts = [
     id: 'dc003',
     name: 'BLACK TRACKSUIT SET',
     price: 89.99,
-    image: '/images/products/black-tracksuit.svg',
+    image: '/images/products/tracksuit.png',
     description: 'Complete hoodie and pants set with signature styling.',
     category: 'Sets',
     stock: 5,
@@ -37,7 +37,7 @@ const mockProducts = [
     id: 'dc004',
     name: 'DELUSIONAL TEE',
     price: 32.99,
-    image: '/images/products/delusional-tee.svg',
+    image: '/images/products/tee.png',
     description: 'Classic black tee with DC delusional branding.',
     category: 'T-Shirts',
     stock: 15,
@@ -47,7 +47,7 @@ const mockProducts = [
     id: 'dc005',
     name: 'VOID BEANIE',
     price: 19.99,
-    image: '/images/products/beanie.svg',
+    image: '/images/placeholder-beanie.svg',
     description: 'Ribbed knit beanie with DC label.',
     category: 'Caps',
     stock: 10
@@ -56,7 +56,7 @@ const mockProducts = [
     id: 'dc006',
     name: 'NIGHTMARE SCARF',
     price: 28.99,
-    image: '/images/products/scarf.svg',
+    image: '/images/products/scarf_front.jpg',
     description: 'Black scarf with fringe details and NIGHTMARE embroidery.',
     category: 'Accessories',
     stock: 7
@@ -71,11 +71,12 @@ export async function generateStaticParams() {
 }
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-const ProductDetailPage = ({ params }: PageProps) => {
-  const product = mockProducts.find(p => p.id === params.id);
+const ProductDetailPage = async ({ params }: PageProps) => {
+  const { id } = await params;
+  const product = mockProducts.find(p => p.id === id);
 
   if (!product) {
     return (
