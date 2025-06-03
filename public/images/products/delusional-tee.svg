@@ -1,0 +1,32 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f5f5f5"/>
+  
+  <!-- T-shirt outline -->
+  <path d="M120 80 L120 60 Q120 50 130 50 L150 50 Q160 45 170 45 L230 45 Q240 45 250 50 L270 50 Q280 50 280 60 L280 80 L320 80 L320 120 L280 120 L280 350 Q280 360 270 360 L130 360 Q120 360 120 350 L120 120 L80 120 L80 80 Z" fill="#000000" stroke="#1a1a1a" stroke-width="2"/>
+  
+  <!-- Sleeve shadows -->
+  <ellipse cx="90" cy="100" rx="15" ry="25" fill="#000000" opacity="0.8"/>
+  <ellipse cx="310" cy="100" rx="15" ry="25" fill="#000000" opacity="0.8"/>
+  
+  <!-- Main text "delusional" -->
+  <text x="200" y="200" font-family="Arial, sans-serif" font-size="24" font-weight="normal" text-anchor="middle" fill="#ffffff">delusional</text>
+  
+  <!-- Small "DC" logo top left -->
+  <text x="140" y="120" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle" fill="#DC143C">DC</text>
+  
+  <!-- Copyright/brand text -->
+  <text x="200" y="220" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#888888">2024 Delusional Club All Rights Reserved</text>
+  
+  <!-- Fabric texture lines -->
+  <g opacity="0.1">
+    <line x1="130" y1="60" x2="270" y2="60" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="130" y1="80" x2="270" y2="80" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="130" y1="100" x2="270" y2="100" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="130" y1="300" x2="270" y2="300" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="130" y1="320" x2="270" y2="320" stroke="#ffffff" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Seam lines -->
+  <line x1="200" y1="50" x2="200" y2="350" stroke="#333333" stroke-width="1" opacity="0.3"/>
+</svg> 
