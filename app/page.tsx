@@ -47,7 +47,7 @@ const mockProducts = [
     id: 'dc005',
     name: 'NEURAL DECAY BEANIE',
     price: 30.00,
-    image: '/images/products/void-walker-cap.svg',
+    image: '/images/products/beanie.svg',
     description: 'Watch your thoughts dissolve.',
     category: 'Caps',
     stock: 7
@@ -87,7 +87,7 @@ const mockProducts = [
     id: 'dc009',
     name: 'PSYCHO WARD HEADBAND',
     price: 18.00,
-    image: '/images/products/black-tracksuit.svg',
+    image: '/images/products/headband.svg',
     description: 'Keep the madness contained.',
     category: 'Headbands',
     stock: 20
@@ -96,7 +96,7 @@ const mockProducts = [
     id: 'dc010',
     name: 'BLOOD RITUAL HEADBAND',
     price: 22.00,
-    image: '/images/products/black-tracksuit.svg',
+    image: '/images/products/headband.svg',
     description: 'Sacred ceremony of the lost.',
     category: 'Headbands',
     stock: 6
@@ -106,7 +106,7 @@ const mockProducts = [
     id: 'dc011',
     name: 'NIGHTMARE SCARF',
     price: 32.00,
-    image: '/images/products/black-tracksuit.svg',
+    image: '/images/products/scarf.svg',
     description: 'Wrap yourself in darkness.',
     category: 'Scarfs',
     stock: 11
@@ -115,7 +115,7 @@ const mockProducts = [
     id: 'dc012',
     name: 'APOCALYPSE SCARF',
     price: 35.00,
-    image: '/images/products/black-tracksuit.svg',
+    image: '/images/products/scarf.svg',
     description: 'End times fashion.',
     category: 'Scarfs',
     stock: 2

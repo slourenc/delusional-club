@@ -1,0 +1,38 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f5f5f5"/>
+  
+  <!-- Beanie main body -->
+  <ellipse cx="200" cy="200" rx="100" ry="80" fill="#000000"/>
+  <ellipse cx="200" cy="190" rx="95" ry="75" fill="#0a0a0a"/>
+  
+  <!-- Beanie fold/cuff -->
+  <ellipse cx="200" cy="250" rx="90" ry="25" fill="#111111"/>
+  <ellipse cx="200" cy="245" rx="85" ry="20" fill="#000000"/>
+  
+  <!-- Ribbed texture -->
+  <g opacity="0.3">
+    <ellipse cx="200" cy="140" rx="80" ry="5" fill="none" stroke="#333333" stroke-width="1"/>
+    <ellipse cx="200" cy="155" rx="85" ry="5" fill="none" stroke="#333333" stroke-width="1"/>
+    <ellipse cx="200" cy="170" rx="90" ry="5" fill="none" stroke="#333333" stroke-width="1"/>
+    <ellipse cx="200" cy="185" rx="93" ry="5" fill="none" stroke="#333333" stroke-width="1"/>
+    <ellipse cx="200" cy="200" rx="95" ry="5" fill="none" stroke="#333333" stroke-width="1"/>
+    <ellipse cx="200" cy="215" rx="93" ry="5" fill="none" stroke="#333333" stroke-width="1"/>
+    <ellipse cx="200" cy="230" rx="90" ry="5" fill="none" stroke="#333333" stroke-width="1"/>
+  </g>
+  
+  <!-- Small embroidered label -->
+  <rect x="180" y="235" width="40" height="12" fill="#1a1a1a" rx="2"/>
+  <text x="200" y="244" font-family="monospace" font-size="8" font-weight="bold" text-anchor="middle" fill="#DC143C">DC</text>
+  
+  <!-- Fold detail -->
+  <path d="M120 250 Q200 235 280 250" stroke="#333333" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M125 260 Q200 245 275 260" stroke="#333333" stroke-width="1" fill="none" opacity="0.6"/>
+  
+  <!-- Top gathering/seam -->
+  <circle cx="200" cy="130" r="8" fill="#0a0a0a"/>
+  <circle cx="200" cy="130" r="4" fill="#000000"/>
+  
+  <!-- Shadow -->
+  <ellipse cx="200" cy="320" rx="70" ry="15" fill="#cccccc" opacity="0.3"/>
+</svg> 
