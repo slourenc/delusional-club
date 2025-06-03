@@ -1,6 +1,6 @@
+/** @type {import('postcss-load-config').Config} */
 const config = {
   plugins: {
-    // Pure CSS setup - no Tailwind needed
     autoprefixer: {},
   },
 };

@@ -67,6 +67,13 @@ const mockProducts = [
   }
 ];
 
+// Generate static params for all products
+export async function generateStaticParams() {
+  return mockProducts.map((product) => ({
+    id: product.id,
+  }));
+}
+
 const ProductDetailPage = () => {
   const params = useParams();
   const router = useRouter();
