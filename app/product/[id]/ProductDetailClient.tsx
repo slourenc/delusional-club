@@ -123,7 +123,7 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
                       className={`px-3 py-1 font-mono text-xs border ${
                         scarfView === 'front' ? 'bg-red-800 text-white' : 'text-red-400 border-red-800'
                       }`}
-                    >
+              >
                       FRONT
                     </button>
                     <button
@@ -324,7 +324,7 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
                     <span>☠️</span>
                     <span>🚫</span>
                     <span>💀</span>
-                  </div>
+                </div>
                   <p className="font-mono text-xs text-red-400">VOID PURCHASE INITIATED</p>
                   <p className="font-mono text-xs text-yellow-400">REALITY CORRUPTION IN PROGRESS</p>
                   <div className="font-mono text-xs text-gray-500 mt-4">
@@ -332,7 +332,7 @@ export const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
                     <p>{'>'} void_level: MAXIMUM</p>
                     <p>{'>'} sanity_check: FAILED</p>
                   </div>
-                </div>
+              </div>
               </div>
             </div>
           </div>

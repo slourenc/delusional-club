@@ -73,7 +73,7 @@ export const CheckoutButton: React.FC<CheckoutButtonProps> = ({ product }) => {
         border: 'none',
         padding: '12px 24px',
         fontSize: '14px',
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Tahoma', monospace",
         fontWeight: 'bold',
         cursor: isLoading ? 'not-allowed' : 'pointer',
         textTransform: 'uppercase',

@@ -1,0 +1,4 @@
+﻿Backup created: 2025-06-03_21-37-12
+Description: Manual backup
+Git branch: main
+Git commit: 12ff578936512d4aa484127338ff3a7bf5ccd61a
