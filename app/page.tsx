@@ -18,7 +18,7 @@ const products = [
     id: 'dc002',
     name: 'DELUSIONAL FITTED CAP',
     price: 35.00,
-    image: '/images/products/cap.png',
+    image: '/images/products/cap_flat.png',
     description: 'Premium fitted cap with structured design.',
     category: 'Caps',
     stock: 12,

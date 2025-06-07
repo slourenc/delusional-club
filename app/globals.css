@@ -36,7 +36,7 @@ html, body {
   image-rendering: -moz-crisp-edges !important;
   image-rendering: crisp-edges !important;
   /* 20% zoom */
-  zoom: 1.2;
+  zoom: 0.9;
   transform-origin: 0 0;
 }
 
